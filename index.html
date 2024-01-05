@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Distance and Angle Calculator</title>
+    <style>
+        #angleOptions {
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Distance and Angle Calculator</h1>
+    <label for="calculationType">Select Calculation Type:</label>
+    <select id="calculationType">
+        <option value="distance">Distance</option>
+        <option value="angle">Angle</option>
+    </select>
+    <br />
+
+    <div id="distanceOptions">
+        <!-- Your distance dropdowns and labels go here -->
+        <label for="firstDropdown">Select residue number:</label>
+        <select id="firstDropdown" onchange="updateSecondDropdown()">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <br/>
+        <label for="secondDropdown">Select atom name:</label>
+        <select id="secondDropdown">
+          <!-- Options will be dynamically populated based on the selection in the first dropdown -->
+        </select>
+        <br/>
+        <label for="firstDropdown1">Select residue number:</label>
+        <select id="firstDropdown1" onchange="updateSecondDropdown1()">
+           <option value="1">1</option>
+           <option value="2">2</option>
+           <option value="3">3</option>
+           <option value="4">4</option>
+           <option value="5">5</option>
+        </select>
+        <br/>
+        <label for="secondDropdown1">Select atom name:</label>
+    <select id="secondDropdown1">
+      <!-- Options will be dynamically populated based on the selection in the first dropdown -->
+    </select>
+      
+    </div>
+
+    <div id="angleOptions">
+        <!-- Your angle dropdowns and labels go here -->
+        <label for="firstDropdown">Select residue number:</label>
+        <select id="firstDropdown2" onchange="updateSecondDropdown2()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+         </select>
+         <br/>
+         <label for="secondDropdown2">Select atom name:</label>
+         <select id="secondDropdown2">
+      <!-- Options will be dynamically populated based on the selection in the first dropdown -->
+         </select> 
+         <br/>
+         <label for="firstDropdown3">Select residue number:</label>
+         <select id="firstDropdown3" onchange="updateSecondDropdown3()">
+             <option value="1">1</option>
+             <option value="2">2</option>
+             <option value="3">3</option>
+             <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <br/>
+        <label for="secondDropdown3">Select atom name:</label>
+    <select id="secondDropdown3">
+      <!-- Options will be dynamically populated based on the selection in the first dropdown -->
+    </select>
+    <br/>
+    <label for="firstDropdown4">Select residue number:</label>
+    <select id="firstDropdown4" onchange="updateSecondDropdown4()">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <br/>
+    <label for="secondDropdown4">Select atom name:</label>
+    <select id="secondDropdown4">
+      <!-- Options will be dynamically populated based on the selection in the first dropdown -->
+    </select>
+    <br/>
+
+    </div>
+
+    <button id="calculateButton">Calculate</button>
+
+    <div id="result">
+        <!-- Calculated result will be displayed here -->
+    </div>
+    
+    <script>
+        // Atom names for each residue number
+        const optionsByCategory = {
+       1: ["N", "CA", "C", "CB", "O", "CG", "SD", "CE"],
+       2: ["N", "CA", "C", "CB", "O", "OG"],
+       3: ["N","CA","C","CB","O","CG","CD","OE1","OE2"],
+       4: ["N","CA","C","CB","O"],
+       5: ["N","CA","C","CB","O","CB","O","CG","CD1","CD2"]
+    };
+    function updateSecondDropdown() {
+      const firstDropdown = document.getElementById("firstDropdown");
+      const secondDropdown = document.getElementById("secondDropdown");
+      const selectedCategory = firstDropdown.value;
+
+      // Clear existing options in the second dropdown
+      secondDropdown.innerHTML = "";
+
+      // Add new options based on the selected category
+      optionsByCategory[selectedCategory].forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        secondDropdown.appendChild(optionElement);
+      });
+    }
+
+    // Initialize the second dropdown based on the default selection in the first dropdown
+    updateSecondDropdown();
+    function updateSecondDropdown1() {
+      const firstDropdown1 = document.getElementById("firstDropdown1");
+      const secondDropdown1 = document.getElementById("secondDropdown1");
+      const selectedCategory = firstDropdown1.value;
+
+      // Clear existing options in the second dropdown
+      secondDropdown1.innerHTML = "";
+
+      // Add new options based on the selected category
+      optionsByCategory[selectedCategory].forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        secondDropdown1.appendChild(optionElement);
+      });
+    }
+    // Initialize the second dropdown based on the default selection in the first dropdown
+    updateSecondDropdown1();
+    function updateSecondDropdown2() {
+      const firstDropdown2 = document.getElementById("firstDropdown2");
+      const secondDropdown2 = document.getElementById("secondDropdown2");
+      const selectedCategory = firstDropdown2.value;
+
+      // Clear existing options in the second dropdown
+      secondDropdown2.innerHTML = "";
+
+      // Add new options based on the selected category
+      optionsByCategory[selectedCategory].forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        secondDropdown2.appendChild(optionElement);
+      });
+    }
+    updateSecondDropdown2();
+
+    function updateSecondDropdown3() {
+      const firstDropdown3 = document.getElementById("firstDropdown3");
+      const secondDropdown3 = document.getElementById("secondDropdown3");
+      const selectedCategory = firstDropdown3.value;
+
+      // Clear existing options in the second dropdown
+      secondDropdown3.innerHTML = "";
+
+      // Add new options based on the selected category
+      optionsByCategory[selectedCategory].forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        secondDropdown3.appendChild(optionElement);
+      });
+    }
+    // Initialize the second dropdown based on the default selection in the first dropdown
+    updateSecondDropdown3();
+    function updateSecondDropdown4() {
+      const firstDropdown4 = document.getElementById("firstDropdown4");
+      const secondDropdown4 = document.getElementById("secondDropdown4");
+      const selectedCategory = firstDropdown1.value;
+
+      // Clear existing options in the second dropdown
+      secondDropdown4.innerHTML = "";
+
+      // Add new options based on the selected category
+      optionsByCategory[selectedCategory].forEach(option => {
+        const optionElement = document.createElement("option");
+        optionElement.value = option;
+        optionElement.text = option;
+        secondDropdown4.appendChild(optionElement);
+      });
+    }
+    // Initialize the second dropdown based on the default selection in the first dropdown
+    updateSecondDropdown4();
+
+
+
+        function updateAtomNames(residueSelectId, atomNameSelectId) {
+            const residueNumber = document.getElementById(residueSelectId).value;
+            const atomNameSelect = document.getElementById(atomNameSelectId);
+            atomNameSelect.innerHTML = ''; // Clear existing options
+
+            // Populate atom names based on the selected residue number
+            atomNamesByResidue[residueNumber].forEach(atomName => {
+                const option = document.createElement("option");
+                option.value = atomName;
+                option.text = atomName;
+                atomNameSelect.appendChild(option);
+            });
+        }
+
+        document.getElementById("calculationType").addEventListener("change", () => {
+            const distanceOptions = document.getElementById("distanceOptions");
+            const angleOptions = document.getElementById("angleOptions");
+
+            if (document.getElementById("calculationType").value === "distance") {
+                distanceOptions.style.display = "block";
+                angleOptions.style.display = "none";
+            } else {
+                distanceOptions.style.display = "none";
+                angleOptions.style.display = "block";
+            }
+        });
+
+        document.getElementById("calculateButton").addEventListener("click", () => {
+            const calculationType = document.getElementById("calculationType").value;
+            let result;
+
+            if (calculationType === "distance") {
+                const residue1 = document.getElementById("distanceResidue1").value;
+                const atom1 = document.getElementById("atomNameDistance1").value;
+                const residue2 = document.getElementById("distanceResidue2").value;
+                const atom2 = document.getElementById("atomNameDistance2").value;
+
+                result = calculateDistance(residue1, atom1, residue2, atom2);
+            } else {
+                const residue1 = document.getElementById("angleResidue1").value;
+                const atom1 = document.getElementById("atomNameAngle1").value;
+                const residue2 = document.getElementById("angleResidue2").value;
+                const atom2 = document.getElementById("atomNameAngle2").value;
+                const residue3 = document.getElementById("angleResidue3").value;
+                const atom3 = document.getElementById("atomNameAngle3").value;
+
+                result = calculateAngle(residue1, atom1, residue2, atom2, residue3, atom3);
+            }
+
+            document.getElementById("result").innerText = result;
+        });
+
+        function calculateDistance(residue1, atom1, residue2, atom2) {
+            // Placeholder logic for distance calculation
+            
+            return `Distance calculation: Residue ${residue1} ${atom1} to Residue ${residue2} ${atom2}`;
+        }
+
+        function calculateAngle(residue1, atom1, residue2, atom2, residue3, atom3) {
+            // Placeholder logic for angle calculation
+           
+
+            document.getElementById("angleResult").innerText = "Angle calculation: Residue " + residue1 + " " + atom1 + " to Residue " + residue2 + " " + atom2 + " to Residue " + residue3 + " " + atom3 + " = " + angle.toFixed(2) + " degrees";
+            return `Angle calculation: Residue ${residue1} ${atom1} to Residue ${residue2} ${atom2} to Residue ${residue3} ${atom3}`;
+        }
+    </script>
+</body>
+</html>
